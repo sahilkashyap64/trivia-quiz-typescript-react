@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/trivia-quiz-typescript-react/static/css/main.073c9b0a.css",
-    "main.js": "/trivia-quiz-typescript-react/static/js/main.3c0097fa.js",
+    "main.js": "/trivia-quiz-typescript-react/static/js/main.85cf660a.js",
     "static/js/787.09d04692.chunk.js": "/trivia-quiz-typescript-react/static/js/787.09d04692.chunk.js",
     "index.html": "/trivia-quiz-typescript-react/index.html",
     "main.073c9b0a.css.map": "/trivia-quiz-typescript-react/static/css/main.073c9b0a.css.map",
-    "main.3c0097fa.js.map": "/trivia-quiz-typescript-react/static/js/main.3c0097fa.js.map",
+    "main.85cf660a.js.map": "/trivia-quiz-typescript-react/static/js/main.85cf660a.js.map",
     "787.09d04692.chunk.js.map": "/trivia-quiz-typescript-react/static/js/787.09d04692.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.073c9b0a.css",
-    "static/js/main.3c0097fa.js"
+    "static/js/main.85cf660a.js"
   ]
 }

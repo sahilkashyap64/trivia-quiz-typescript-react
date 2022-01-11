@@ -65,7 +65,7 @@ const App: React.FC = () => {
       alert('Correct Answer');
       retrieveRandomQuestion();
     }else{
-      console.log("InCorrect Answer");
+      // console.log("InCorrect Answer");
       alert('InCorrect Answer');
       retrieveRandomQuestion();
     }

@@ -41,6 +41,36 @@ const App: React.FC = () => {
       cancelTokenSource.cancel('User cancelled operation');
     }
   };
+  const validationSchema = Yup.object().shape({
+    
+    useranswer: Yup.string()
+      .required('Answer is required')
+  });
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors }
+  } = useForm<UserSubmitForm>({
+    resolver: yupResolver(validationSchema)
+  });
+  const onSubmit = (data: UserSubmitForm) => {
+    // console.log(JSON.stringify(data, null, 2));
+   const ans= data.useranswer.localeCompare(questions[0]['answer'], undefined, { sensitivity: 'accent' });
+   console.log("ans",ans);
+   if(ans==0){
+      // console.log("Correct Answer");
+      alert('Correct Answer');
+      retrieveRandomQuestion();
+    }else{
+      console.log("InCorrect Answer");
+      alert('InCorrect Answer');
+      retrieveRandomQuestion();
+    }
+    reset();
+  };
+
   const retrieveRandomQuestion = () => {
     axios
       .get<IQuestion[]>('https://jservice.io/api/random', {
@@ -71,23 +101,43 @@ const App: React.FC = () => {
     retrieveRandomQuestion();
   }, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="register-form">
+       {loading && <button onClick={handleCancelClick}>Cancel</button>}
+      <ul className="posts">
+        {questions.map((post) => (
+          <div key={post.id}>
+            <h4>Question: {post.question }</h4>
+            <p>Answer is<br></br> {post.answer}</p>
+          </div>
+        ))}
+      </ul>
+      <form onSubmit={handleSubmit(onSubmit)}>
+
+        <div className="form-group">
+          <label>Enter your answer</label>
+          <input
+            type="text"
+            {...register('useranswer')}
+            className={`form-control ${errors.useranswer ? 'is-invalid' : ''}`}
+          />
+          <div className="invalid-feedback">{errors.useranswer?.message}</div>
+        </div>
+
+
+        <div className="form-group">
+          <button type="submit" className="btn btn-primary">
+            Submit
+          </button>
+          <button
+            type="button"
+            onClick={() => reset()}
+            className="btn btn-warning float-right"
+          >
+            Reset
+          </button>
+        </div>
+      </form>
     </div>
   );
-}
-
+};
 export default App;

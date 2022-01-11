@@ -101,14 +101,23 @@ const App: React.FC = () => {
     retrieveRandomQuestion();
   }, []);
   return (
-    <div className="register-form">
+    <div className="container-fluid">
        {loading && <button onClick={handleCancelClick}>Cancel</button>}
+       <h3>Random trivia</h3>
       <ul className="posts">
+        
         {questions.map((post) => (
-          <div key={post.id}>
-            <h4>Question: {post.question }</h4>
-            <p>Answer is<br></br> {post.answer}</p>
+          
+          <div className="card">
+          <div className="card-header">Question </div>
+          <div className="card-body">
+          {post.question }
+          
           </div>
+
+          <div className="card-footer"><p>Answer</p>{post.answer} </div>
+       </div>
+          
         ))}
       </ul>
       <form onSubmit={handleSubmit(onSubmit)}>

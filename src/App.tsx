@@ -5,6 +5,7 @@ import axios, { CancelTokenSource } from 'axios';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup'; 
+import QuestionDataService from "./services/list";
 type UserSubmitForm = {
   useranswer: string;
 };
@@ -58,7 +59,7 @@ const App: React.FC = () => {
   const onSubmit = (data: UserSubmitForm) => {
     // console.log(JSON.stringify(data, null, 2));
    const ans= data.useranswer.localeCompare(questions[0]['answer'], undefined, { sensitivity: 'accent' });
-   console.log("ans",ans);
+  //  console.log("ans",ans);
    if(ans==0){
       // console.log("Correct Answer");
       alert('Correct Answer');
@@ -72,15 +73,8 @@ const App: React.FC = () => {
   };
 
   const retrieveRandomQuestion = () => {
-    axios
-      .get<IQuestion[]>('https://jservice.io/api/random', {
-        cancelToken: cancelTokenSource.token,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        timeout: 10000,
-      })
-      .then((response) => {
+    
+    QuestionDataService.getQuestion().then((response) => {
         setQuestions(response.data);
         setLoading(false);
       })
